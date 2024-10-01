@@ -15,6 +15,9 @@ Found on: gitignore.io
 ## 2. NPM installation guide used to install NPM in back-end and front-end directory
 Found on: https://nodesource.com/blog/an-absolute-beginners-guide-to-using-npm/ 
 
+## 3. Vue CLI installation guide to install vue Cli in front-end directory
+Found on: https://cli.vuejs.org/guide/installation.html 
+
 # Credentials
 
 
