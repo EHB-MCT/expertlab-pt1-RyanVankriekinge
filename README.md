@@ -12,6 +12,8 @@ node index.js
 ## 1. Create gitignore file, used this website to create a suitable .gitignore file for a Node project
 Found on: gitignore.io
 
+## 2. NPM installation guide used to install NPM in back-end and front-end directory
+Found on: https://nodesource.com/blog/an-absolute-beginners-guide-to-using-npm/ 
 
 # Credentials
 
