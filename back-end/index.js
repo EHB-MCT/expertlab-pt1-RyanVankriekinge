@@ -35,12 +35,37 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
             cookie: { secure: false, path: '/' }
         }));
 
+        //Unauthenticated endpoints
+        app.post('/addUser', async (req, res) => {
+            const { name, email, password } = req.body;
+
+            try {
+                const existingName = await db.collection('Users').findOne({ name });
+                const existingEmail = await db.collection('Users').findOne({ email });
+                if (existingName) {
+                    return res.status(400).json({ success: false, message: 'Username already exists' });
+                }
+                if (existingEmail) {
+                    return res.status(400).json({ success: false, message: 'Email address already in use' });
+                }
+                const newUser = {
+                    name,
+                    email,
+                    password
+                };
+                const result = await db.collection('Users').insertOne(newUser);
+                res.json({ success: true, userId: result.insertedId.toString() });
+            } catch (error) {
+                console.error('Error adding user:', error);
+                res.status(500).json({ success: false, message: 'Server error' });
+            }
+        });
+        //Authenticated Endpoints
+
         // Start the server
         app.listen(port, () => {
             console.log(`Server is running on http://localhost:${port}`);
         });
-
-        // Endpoints
 
     })
     .catch(err => {
