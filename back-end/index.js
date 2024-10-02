@@ -71,6 +71,39 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
             }
         });
 
+        app.post('/login', async (req, res) => {
+            const { username, password } = req.body;
+            try {
+                const user = await db.collection('Users').findOne({ name: username, password });
+                if (user) {
+                    req.session.user = { username: username };
+                    req.session.save(err => {
+                        if (err) {
+                            console.error('Session save error:', err);
+                            return res.status(500).json({ success: false, message: 'Session save error' });
+                        }
+                        res.json({ success: true, message: 'User successfully logged in' });
+                    });
+                } else {
+                    res.json({ success: false, message: 'Incorrect password or username' });
+                }
+            } catch (error) {
+                console.error(error);
+                res.status(500).json({ success: false, message: 'Server Error' });
+            }
+        });
+        app.post('/log-out', (req, res) => {
+            req.session.destroy(err => {
+                if (err) {
+                    console.error('Error ending session:', err);
+                    return res.status(500).json({ success: false, message: 'Failed to logout' });
+                }
+
+                res.clearCookie('connect.sid');
+                res.json({ success: true, message: 'Logged out successfully' });
+            });
+        });
+
         //Authenticated Endpoints
 
         // Start the server
