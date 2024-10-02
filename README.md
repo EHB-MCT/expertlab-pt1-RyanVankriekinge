@@ -21,6 +21,13 @@
    Referenced the [Vue CLI Installation Guide](https://cli.vuejs.org/guide/installation.html) for installing Vue CLI in the front-end directory.
 
 4. **MongoDB Connection**  
-   The connection code for MongoDB Atlas was adapted from the official MongoDB Atlas setup documentation. [MongoDB Atlas Documentation](https://www.mongodb.com/docs/atlas/).
+   The connection code for MongoDB Atlas was adapted from the official [MongoDB Atlas Documentation](https://www.mongodb.com/docs/atlas/).
+
+5. **Node Server Setup**  
+   Based on my own application **BugBytes**, which I created for Web 2.
+
+6. **Creating Models with Node**  
+   Utilized techniques from [Sharma, P. (2021). Node.js models and database](https://javascript.plainenglish.io/node-js-models-and-database-3836f0c7f2da) for creating models.
+
 
 ## Credentials
