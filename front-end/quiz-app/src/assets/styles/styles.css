@@ -27,3 +27,9 @@ p{
 font-family: 'Quicksand';
 font-size: 20px;
 }
+
+.button-big{
+    color: white;
+    background-color: #FE8465;
+    padding: 40px 90%;
+}

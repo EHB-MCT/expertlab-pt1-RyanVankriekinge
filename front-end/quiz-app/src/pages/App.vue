@@ -17,7 +17,6 @@
   <RouterView></RouterView>
 
   <div id="app">
-    <div class="background-image"></div>
     <footer>
     </footer>
   </div>
