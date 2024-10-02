@@ -92,6 +92,19 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
                 res.status(500).json({ success: false, message: 'Server Error' });
             }
         });
+
+        function isAuthenticated(req, res, next) {
+            if (req.session && req.session.user) {
+                return next();
+            } else {
+                res.json({ success: false, message: 'User is not authenticated' });
+            }
+        }
+
+        app.get('/check-login', isAuthenticated, (req, res) => {
+            res.json({ success: true, username: req.session.user.username });
+        });
+
         app.post('/log-out', (req, res) => {
             req.session.destroy(err => {
                 if (err) {
