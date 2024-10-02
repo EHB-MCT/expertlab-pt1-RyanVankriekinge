@@ -32,4 +32,7 @@
 7. **Express session Management**  
    Found information on session management in Node.js applications from the official [Express.js Middleware Documentation](https://expressjs.com/en/resources/middleware/session.html) and the article [How to Implement Session Management in Node.js Applications](https://dev.to/saint_vandora/how-to-implement-session-management-in-nodejs-applications-5emm).
 
+8. **Vue router guide**
+   geraadpleegd via https://router.vuejs.org/guide/
+
 ## Credentials
