@@ -60,6 +60,17 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
                 res.status(500).json({ success: false, message: 'Server error' });
             }
         });
+
+        app.get('/users', async (req, res) => {
+            try {
+                const items = await db.collection('Users').find({}).toArray();
+                res.json(items);
+            } catch (error) {
+                console.error(error);
+                res.status(500).json({ error: 'Server Error' });
+            }
+        });
+
         //Authenticated Endpoints
 
         // Start the server
