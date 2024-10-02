@@ -6,4 +6,16 @@
     </div>
 </template>
 <script>
+export default {
+    name: 'HomePage',
+    data() {
+
+    },
+    methods: {
+
+    },
+    created() {
+
+    },
+};
 </script>
