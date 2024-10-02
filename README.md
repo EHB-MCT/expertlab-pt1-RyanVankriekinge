@@ -21,6 +21,6 @@
    Referenced the [Vue CLI Installation Guide](https://cli.vuejs.org/guide/installation.html) for installing Vue CLI in the front-end directory.
 
 4. **MongoDB Connection**  
-   Based on the connection file in my own application, **BugBytes**, created for the Web 2 course.
+   The connection code for MongoDB Atlas was adapted from the official MongoDB Atlas setup documentation. [MongoDB Atlas Documentation](https://www.mongodb.com/docs/atlas/).
 
 ## Credentials
