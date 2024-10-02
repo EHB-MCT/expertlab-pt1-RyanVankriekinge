@@ -1,24 +1,26 @@
-# Instructions:
-## Project set-up
-npm install (to install node modules)
+## Instructions:
+**Project set-up**
 
-## To run server with API:
-npm install (to install node modules)
-node index.js
+```npm install``` (to install node modules)
 
+**To run server with API:**
 
-# References:
-
-## 1. Create gitignore file, used this website to create a suitable .gitignore file for a Node project
-Found on: gitignore.io
-
-## 2. NPM installation guide used to install NPM in back-end and front-end directory
-Found on: https://nodesource.com/blog/an-absolute-beginners-guide-to-using-npm/ 
-
-## 3. Vue CLI installation guide to install vue Cli in front-end directory
-Found on: https://cli.vuejs.org/guide/installation.html 
-
-# Credentials
+```node index.js```
+(to run server)
 
 
-## Accounts on BugBytes application:
+## References
+
+1. **.gitignore File Creation**  
+   Used [gitignore.io](https://gitignore.io) to generate a suitable `.gitignore` file for a Node.js project.
+
+2. **NPM Installation Guide**  
+   Followed the guide from [NodeSource](https://nodesource.com/blog/an-absolute-beginners-guide-to-using-npm/) for installing NPM in both back-end and front-end directories.
+
+3. **Vue CLI Installation Guide**  
+   Referenced the [Vue CLI Installation Guide](https://cli.vuejs.org/guide/installation.html) for installing Vue CLI in the front-end directory.
+
+4. **MongoDB Connection**  
+   Based on the connection file in my own application, **BugBytes**, created for the Web 2 course.
+
+## Credentials
