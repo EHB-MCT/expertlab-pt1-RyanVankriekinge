@@ -31,3 +31,14 @@
 }
 
 
+/*join-lobby-page*/
+
+.join-lobby{
+  padding-top: 20%;
+}
+
+@media (min-width: 680px) {
+  .join-lobby{
+      padding-top: 150px !important;
+  }
+}
