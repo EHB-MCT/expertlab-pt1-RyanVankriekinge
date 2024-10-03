@@ -9,12 +9,11 @@ nav{
     max-width: 370px;
 }
 
-.icon{
-    width: 40px;
+a{
+  display: flex;
 }
 
-@media (min-width: 769px) {
-    nav{
-      max-width: 740px; 
-    }
-  }
+.icon{
+    width: 40px;
+    margin-top: auto;
+}
