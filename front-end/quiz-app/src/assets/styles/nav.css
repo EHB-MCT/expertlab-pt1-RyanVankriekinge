@@ -1,17 +1,20 @@
 nav{
+    box-sizing: border-box;
     display: flex;
-    width: 130%;
     justify-content: space-between;
-    padding: 10px 20px;
-    margin-top: 30px;
+    padding: 10px 20px !important;
+    margin: 0px auto !important;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    max-width: 370px;
 }
 
 .icon{
     width: 40px;
 }
 
-@media (min-width: 500px) {
+@media (min-width: 769px) {
     nav{
-      width: 350px; 
+      max-width: 740px; 
     }
   }
