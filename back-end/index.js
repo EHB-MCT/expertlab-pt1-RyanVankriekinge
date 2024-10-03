@@ -11,7 +11,7 @@ const dbName = "FlashQuiz";
 
 // CORS configuration
 const corsOptions = {
-    origin: ['http://localhost:5500', 'http://127.0.0.1:5500'],
+    origin: ['http://localhost:8080', 'http://127.0.0.1:5500'],
     methods: ['GET', 'POST', 'DELETE'],
     credentials: true,
     optionsSuccessStatus: 204
@@ -37,10 +37,10 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
 
         //Unauthenticated endpoints
         app.post('/addUser', async (req, res) => {
-            const { name, email, password } = req.body;
+            const { username, email, password } = req.body;
 
             try {
-                const existingName = await db.collection('Users').findOne({ name });
+                const existingName = await db.collection('Users').findOne({ username });
                 const existingEmail = await db.collection('Users').findOne({ email });
                 if (existingName) {
                     return res.status(400).json({ success: false, message: 'Username already exists' });
@@ -49,7 +49,7 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
                     return res.status(400).json({ success: false, message: 'Email address already in use' });
                 }
                 const newUser = {
-                    name,
+                    username,
                     email,
                     password
                 };
@@ -74,7 +74,7 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
         app.post('/login', async (req, res) => {
             const { username, password } = req.body;
             try {
-                const user = await db.collection('Users').findOne({ name: username, password });
+                const user = await db.collection('Users').findOne({ username: username, password });
                 if (user) {
                     req.session.user = { username: username };
                     req.session.save(err => {
