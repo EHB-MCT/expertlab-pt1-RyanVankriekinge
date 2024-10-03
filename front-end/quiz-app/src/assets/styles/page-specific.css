@@ -31,6 +31,7 @@
 }
 
 
+
 /*join-lobby-page*/
 
 .join-lobby{
@@ -39,6 +40,20 @@
 
 @media (min-width: 680px) {
   .join-lobby{
+      padding-top: 150px !important;
+  }
+}
+
+
+
+/*profile-page*/
+
+.profile{
+  padding-top: 20%;
+}
+
+@media (min-width: 680px) {
+  .profile{
       padding-top: 150px !important;
   }
 }
