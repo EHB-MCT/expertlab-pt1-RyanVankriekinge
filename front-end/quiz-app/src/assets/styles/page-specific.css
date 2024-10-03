@@ -18,14 +18,14 @@
 
 
 
-/*host-lobby-page*/
+/*create-lobby-page*/
 
-.host-lobby{
+.create-lobby{
   padding-top: 20%;
 }
 
 @media (min-width: 680px) {
-  .host-lobby{
+  .create-lobby{
       padding-top: 150px !important;
   }
 }

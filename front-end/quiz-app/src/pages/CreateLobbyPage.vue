@@ -1,6 +1,6 @@
 <template>
     <main>
-        <div class="content host-lobby">
+        <div class="content create-lobby">
             <h2>Choose quiz</h2>
             <form @submit.prevent="submitForm" class="choose-quiz">
                 <select v-model="selectedQuiz" class="quiz-dropdown input-field">
@@ -18,6 +18,6 @@
 
 <script>
     export default {
-        name: 'HostLobbyPage',
+        name: 'CreateLobbyPage',
     };
 </script>

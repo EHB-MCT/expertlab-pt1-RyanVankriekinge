@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from '../pages/HomePage.vue';
 import ProfilePage from '../pages/ProfilePage.vue';
-import HostLobbyPage from '../pages/HostLobbyPage.vue';
+import CreateLobbyPage from '../pages/CreateLobbyPage.vue';
 import JoinLobbyPage from '../pages/JoinLobbyPage.vue';
 
 const router = createRouter({
@@ -23,9 +23,9 @@ const router = createRouter({
       component: JoinLobbyPage
     },
     {
-      path: '/host-lobby',
-      name: 'host-lobby',
-      component: HostLobbyPage
+      path: '/create-lobby',
+      name: 'create-lobby',
+      component: CreateLobbyPage
     },
   ]
 });
