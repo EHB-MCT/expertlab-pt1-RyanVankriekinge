@@ -8,16 +8,7 @@
   </main>
 </template>
 <script>
-export default {
-    name: 'HomePage',
-    data() {
-
-    },
-    methods: {
-
-    },
-    created() {
-
-    },
-};
+  export default {
+      name: 'HomePage',
+  };
 </script>
