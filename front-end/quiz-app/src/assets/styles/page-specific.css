@@ -1,0 +1,33 @@
+/*home-page*/
+
+.home{
+    padding-top: 20% !important;
+}
+
+@media (min-width: 680px) {
+    button{
+      margin: 0px 20px;
+    }
+  }
+
+@media (min-width: 680px) {
+    .home{
+        padding-top: 150px !important;
+    }
+}
+
+
+
+/*host-lobby-page*/
+
+.host-lobby{
+  padding-top: 20%;
+}
+
+@media (min-width: 680px) {
+  .host-lobby{
+      padding-top: 150px !important;
+  }
+}
+
+

@@ -1,5 +1,5 @@
 @import url("nav.css");
-@import url("home.css");
+@import url("page-specific.css");
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 @import url("https://use.typekit.net/gzs2rlu.css");
 
@@ -31,6 +31,16 @@ main{
 }
 
 .content{
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-top: auto;
+    text-align: center;
+}
+
+form{
     box-sizing: border-box;
     display: flex;
     justify-content: center;
@@ -72,6 +82,32 @@ p{
     padding: 40px 120px;
     max-width: 340px;
     border-radius: 20px;
+    margin: 0px auto;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.button-small{
+    color: white;
+    background-color: #FE8465;
+    width: 340px;
+    height: 45px;
+    max-width: 340px;
+    border-radius: 10px;
+    margin: 0px auto;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.input-field{
+    color: white;
+    background-color: #4C3E7F;
+    border: white solid 1px;
+    width: 334px;
+    height: 43px;
+    text-align: center;
+    max-width: 340px;
+    border-radius: 10px;
     margin: 0px auto;
     margin-bottom: 15px;
     font-size: 20px;
