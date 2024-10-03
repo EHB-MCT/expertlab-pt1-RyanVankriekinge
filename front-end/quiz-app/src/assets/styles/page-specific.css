@@ -57,3 +57,17 @@
       padding-top: 150px !important;
   }
 }
+
+
+
+/*login-page*/
+
+.login{
+  padding-top: 20%;
+}
+
+@media (min-width: 680px) {
+  .login{
+      padding-top: 150px !important;
+  }
+}
