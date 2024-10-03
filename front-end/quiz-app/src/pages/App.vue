@@ -1,9 +1,9 @@
 <template>
 <div class="app">
   <nav>
-    <router-link to="/" class="nav-link">
+    <a class="nav-link" @click.prevent="goBack">
       <img src="../assets/icons/Icon awesome-arrow-alt-circle-left.svg" alt="Back" class="icon" />
-    </router-link>
+    </a>
     
     <router-link to="/" class="logo">
       <h1>FlashQuiz</h1>
@@ -19,10 +19,11 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  methods: {
+    goBack() {
+      this.$router.go(-1);
+    }
+  }
 };
 </script>
-
-<style>
-  
-</style>
