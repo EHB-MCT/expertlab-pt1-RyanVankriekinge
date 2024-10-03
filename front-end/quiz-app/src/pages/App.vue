@@ -18,12 +18,12 @@
 </template>
 
 <script>
-export default {
-  name: 'App',
-  methods: {
-    goBack() {
-      this.$router.go(-1);
+  export default {
+    name: 'App',
+    methods: {
+      goBack() {
+        this.$router.go(-1);
+      }
     }
-  }
-};
+  };
 </script>
