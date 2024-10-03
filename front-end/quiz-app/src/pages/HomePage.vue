@@ -2,7 +2,7 @@
     <main>
       <div class="content home">
         <h2>Play a quiz</h2>
-        <button class="button-big" @click="goToHostLobby">Host lobby</button>
+        <button class="button-big" @click="goToCreateLobby">Host lobby</button>
         <button class="button-big" @click="goToJoinLobby">Join lobby</button>
     </div>
   </main>
@@ -11,8 +11,8 @@
   export default {
     name: 'HomePage',
     methods: {
-      goToHostLobby() {
-        this.$router.push('/host-lobby'); 
+      goToCreateLobby() {
+        this.$router.push('/create-lobby'); 
       },
       goToJoinLobby() {
         this.$router.push('/join-lobby');
