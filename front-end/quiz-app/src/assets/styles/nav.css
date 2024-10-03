@@ -1,16 +1,13 @@
 nav{
     display: flex;
-    width: 100%;
-    margin: 10px auto;
+    width: 130%;
+    justify-content: space-between;
+    padding: 10px 20px;
     margin-top: 30px;
 }
 
 .icon{
     width: 40px;
-}
-
-router-link{
-    margin: auto;
 }
 
 @media (min-width: 500px) {

@@ -13,13 +13,7 @@
       <img src="../assets/icons/Icon awesome-user-circle.svg" alt="Profile" class="icon" />
     </router-link>
   </nav>
-
-  <RouterView></RouterView>
-
-  <div id="app">
-    <footer>
-    </footer>
-  </div>
+    <RouterView></RouterView>
 </div>
 </template>
 

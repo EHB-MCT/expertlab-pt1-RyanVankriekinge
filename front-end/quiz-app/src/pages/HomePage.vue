@@ -1,11 +1,21 @@
 <template>
-    <div>
-        <h2>Play a quiz</h2>
-        <p class="button-big">Host lobby</p>
-    </div>
+  <div class="content">
+      <h2>Play a quiz</h2>
+      <button class="button-big">Host lobby</button>
+      <button class="button-big">Join lobby</button>
+  </div>
 </template>
 <script>
 export default {
     name: 'HomePage',
+    data() {
+
+    },
+    methods: {
+
+    },
+    created() {
+
+    },
 };
 </script>
