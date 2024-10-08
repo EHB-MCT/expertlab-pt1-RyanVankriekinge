@@ -72,6 +72,8 @@
   }
 }
 
+
+
 /*create-account-page*/
 
 .create-account{
@@ -83,6 +85,8 @@
       padding-top: 100px !important;
   }
 }
+
+
 
 /*create-quiz-page*/
 
@@ -103,4 +107,12 @@
 .correct-answer-radio{
   margin-top: 0px;
   margin-bottom: 40px;
+}
+
+.answers-section{
+  border: white solid 1px;
+  border-left: none;
+  border-right: none;
+  margin-bottom: 10px;
+  margin-top: 20px;
 }

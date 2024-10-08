@@ -13,45 +13,46 @@
             />
 
             <div class="questions-section">
-            <p>Questions</p>
-            <div v-for="(question, index) in questions" :key="index" class="question-item">
-                <input
-                v-model="question.text"
-                type="text"
-                class="input-field"
-                :placeholder="'Question ' + (index + 1)"
-                required
-                />
-
-                <div class="answers-section">
-                <p>Answers</p>
-                <div v-for="(answer, answerIndex) in question.answers" :key="answerIndex" class="answer-item">
+                <p style="margin-top: 30px;">Questions</p>
+                <div v-for="(question, index) in questions" :key="index" class="question-item">
                     <input
-                    v-model="answer.text"
+                    v-model="question.text"
                     type="text"
                     class="input-field"
-                    :placeholder="'Answer ' + (answerIndex + 1)"
+                    :placeholder="'Question ' + (index + 1)"
+                    style="margin-top: 30px;"
                     required
                     />
-                    <label class="correct-answer-text">
-                        <br>
-                    <input
-                        class="correct-answer-radio"
-                        type="radio"
-                        v-model="question.correctAnswer"
-                        :value="answerIndex"
-                    />
-                    Correct Answer
-                    </label>
+
+                    <div class="answers-section">
+                        <p style="margin-top: 30px;">Answers (Question {{ index + 1 }})</p>
+                        <div v-for="(answer, answerIndex) in question.answers" :key="answerIndex" class="answer-item">
+                            <input
+                            v-model="answer.text"
+                            type="text"
+                            class="input-field"
+                            :placeholder="'Answer ' + (answerIndex + 1)"
+                            required
+                            />
+                            <label class="correct-answer-text">
+                                <br>
+                            <input
+                                class="correct-answer-radio"
+                                type="radio"
+                                v-model="question.correctAnswer"
+                                :value="answerIndex"
+                            />
+                            Correct Answer
+                            </label>
+                        </div>
+                        <button type="button" class="button-small" @click="addAnswer(index)">Add Answer</button>
+                        <button type="button" class="button-small red" @click="removeQuestion(index)">Remove Question {{ index + 1 }}</button>
+                    </div>
                 </div>
-                <button type="button" class="button-small" @click="addAnswer(index)">Add Answer</button>
-                </div>
-                <button type="button" class="button-small" @click="removeQuestion(index)">Remove Question</button>
-            </div>
-            <button type="button" class="button-small" @click="addQuestion">Add Question</button>
+                <button type="button" class="button-small" @click="addQuestion" style="margin-top: 30px;">Add Question</button>
             </div>
 
-            <button class="button-small" type="submit">Create Quiz</button>
+            <button class="button-small" type="submit" style="margin-top: 30px;">Create Quiz</button>
         </form>
     </div>
 </main>
