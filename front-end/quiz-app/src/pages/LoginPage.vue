@@ -56,6 +56,7 @@
           
           if (result.success) {
             alert('Logged in successfully!'); 
+            this.$router.push('/profile');
           } else {
             this.errorMessage = result.message; 
           }
