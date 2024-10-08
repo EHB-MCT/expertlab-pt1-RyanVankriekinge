@@ -78,6 +78,7 @@
                 if (response.ok) {
                 alert('Account successfully created');
                 this.errorMessage = '';
+                this.$router.push('/profile');
                 } else {
                 this.errorMessage = result.error || 'An error occurred';
                 }
