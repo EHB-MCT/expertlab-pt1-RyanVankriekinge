@@ -79,7 +79,10 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
             try {
                 const user = await db.collection('Users').findOne({ username: username, password });
                 if (user) {
-                    req.session.user = { username: username };
+                    req.session.user = {
+                        username: username,
+                        email: user.email
+                    };
                     req.session.save(err => {
                         if (err) {
                             console.error('Session save error:', err);
@@ -108,7 +111,10 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
 
         app.get('/check-login', isAuthenticated, (req, res) => {
             console.log('Checking login session:', req.session);
-            res.json({ success: true, username: req.session.user.username, email: req.session.user.email });
+            res.json({ success: true,
+                username: req.session.user.username,
+                email: req.session.user.email
+            });
         });
 
         app.post('/log-out', (req, res) => {
