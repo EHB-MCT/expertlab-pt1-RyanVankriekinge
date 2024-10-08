@@ -49,6 +49,7 @@
               username: this.username,
               password: this.password,
             }),
+            credentials: 'include'
           });
           
           const result = await response.json();

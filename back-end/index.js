@@ -82,6 +82,7 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
                             console.error('Session save error:', err);
                             return res.status(500).json({ success: false, message: 'Session save error' });
                         }
+                        console.log('Session after login:', req.session);
                         res.json({ success: true, message: 'User successfully logged in' });
                     });
                 } else {
@@ -94,6 +95,7 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
         });
 
         function isAuthenticated(req, res, next) {
+            console.log('Session in isAuthenticated:', req.session);
             if (req.session && req.session.user) {
                 return next();
             } else {
@@ -102,7 +104,8 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
         }
 
         app.get('/check-login', isAuthenticated, (req, res) => {
-            res.json({ success: true, username: req.session.user.username });
+            console.log('Checking login session:', req.session);
+            res.json({ success: true, username: req.session.user.username, email: req.session.user.email });
         });
 
         app.post('/log-out', (req, res) => {
