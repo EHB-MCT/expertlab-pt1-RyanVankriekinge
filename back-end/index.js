@@ -129,7 +129,32 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
             });
         });
 
-        //Authenticated Endpoints
+        // Authenticated endpoints
+
+        app.post('/add-quiz',isAuthenticated, async (req, res) => {
+            console.log('Session Data:', req.session);
+            try {
+                const username = req.session.username;
+                if (!username) {
+                    return res.status(401).send({ message: 'User is not authenticated' });
+                }
+                const newQuiz = {
+                    title: req.body.title,
+                    userName: username,
+                    questions: req.body.questions.map(question => ({
+                        text: question.text,
+                        answers: question.answers,
+                        correctAnswer: question.correctAnswer
+                    })),
+                };
+
+                const result = await db.collection('quizzes').insertOne(newQuiz);
+                res.status(201).send(result.ops[0]);
+            } catch (error) {
+                console.error('Error inserting quiz into database:', error);
+                res.status(400).send(error);
+            }
+        });
 
         // Start the server
         app.listen(port, () => {
