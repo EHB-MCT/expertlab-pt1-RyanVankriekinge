@@ -83,3 +83,24 @@
       padding-top: 100px !important;
   }
 }
+
+/*create-quiz-page*/
+
+.create-quiz{
+  padding-top: 10%;
+}
+
+@media (min-width: 680px) {
+  .create-quiz{
+      padding-top: 30px !important;
+  }
+}
+
+.correct-answer-text{
+  font-family: 'Quicksand';
+}
+
+.correct-answer-radio{
+  margin-top: 0px;
+  margin-bottom: 40px;
+}
