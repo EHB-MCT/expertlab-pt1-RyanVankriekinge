@@ -1,4 +1,4 @@
-# quiz-app
+# FlashQuiz
 
 ## Project setup
 ```
