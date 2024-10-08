@@ -76,6 +76,22 @@
       };
     },
     methods: {
+      addQuestion() {
+        this.questions.push({
+          text: '',
+          answers: [
+            { text: '' },
+            { text: '' }
+          ],
+          correctAnswer: null
+        });
+      },
+      removeQuestion(index) {
+        this.questions.splice(index, 1);
+      },
+      addAnswer(questionIndex) {
+        this.questions[questionIndex].answers.push({ text: '' });
+      },
       
     },
   };

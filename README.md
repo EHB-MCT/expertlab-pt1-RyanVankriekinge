@@ -44,7 +44,7 @@ npm run lint
    The connection code for MongoDB Atlas was adapted from the official [MongoDB Atlas Documentation](https://www.mongodb.com/docs/atlas/).
 
 5. **Node Server Setup**  
-   Based on my own application **BugBytes**, which I created for Web 2.
+   Based on my own application [BugBytes (back-end)](https://github.com/EHB-MCT/web2-course-project-back-end-RyanVankriekinge)
 
 6. **Creating Models with Node**  
    Utilized techniques from [Sharma, P. (2021). Node.js models and database](https://javascript.plainenglish.io/node-js-models-and-database-3836f0c7f2da) for creating models.
@@ -54,5 +54,12 @@ npm run lint
 
 8. **Vue router guide**  
    Created router with [Vue Router Guide](https://router.vuejs.org/guide/)
+
+9. **Vue array: deleting and adding values**  
+   Used mutation methods from [Vue Array Change Detection](https://v2.vuejs.org/v2/guide/list)
+
+10. **Authentication system**  
+   Based on my own application [BugBytes (front-end)](https://github.com/EHB-MCT/web2-course-project-front-end-RyanVankriekinge) and [BugBytes (back-end)](https://github.com/EHB-MCT/web2-course-project-back-end-RyanVankriekinge)
+
 
 ## Credentials
