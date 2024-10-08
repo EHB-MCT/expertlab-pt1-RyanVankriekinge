@@ -71,3 +71,15 @@
       padding-top: 150px !important;
   }
 }
+
+/*create-account-page*/
+
+.create-account{
+  padding-top: 20%;
+}
+
+@media (min-width: 680px) {
+  .create-account{
+      padding-top: 100px !important;
+  }
+}
