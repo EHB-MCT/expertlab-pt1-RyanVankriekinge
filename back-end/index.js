@@ -32,7 +32,10 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
             secret: 'setsecrethere',
             resave: false,
             saveUninitialized: false,
-            cookie: { secure: false, path: '/' }
+            cookie: { secure: false,
+                path: '/',
+                maxAge: 1000 * 60 * 60 * 24
+            }
         }));
 
         //Unauthenticated endpoints
