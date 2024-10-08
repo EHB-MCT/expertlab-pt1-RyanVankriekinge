@@ -45,5 +45,46 @@
 <script>
     export default {
         name: 'CreateAccountPage',
+        data() {
+            return {
+            username: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+            errorMessage: ''
+            };
+        },
+        methods: {
+            async join() {
+            if (this.password !== this.confirmPassword) {
+                this.errorMessage = 'Passwords do not match';
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:3000/addUser', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    username: this.username,
+                    email: this.email,
+                    password: this.password,
+                    confirmPassword: this.confirmPassword
+                })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                alert('Account successfully created');
+                this.errorMessage = '';
+                } else {
+                this.errorMessage = result.error || 'An error occurred';
+                }
+            } catch (error) {
+                this.errorMessage = 'An error occurred while connecting to the server';
+            }
+            }
+        }
     };
 </script>
