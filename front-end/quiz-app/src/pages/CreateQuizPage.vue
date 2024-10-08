@@ -5,7 +5,7 @@
         <form @submit.prevent="submitQuiz" class="create-quiz-form">
 
             <input
-            v-model="quizTitle"
+            v-model="title"
             type="text"
             class="input-field"
             placeholder="Quiz Title"
@@ -57,41 +57,69 @@
 </template>
   
 <script>
-  export default {
-    name: 'CreateQuizPage',
-    data() {
-      return {
-        quizTitle: '',
-        questions: [
-          {
-            text: '',
-            answers: [
-              { text: '' },
-              { text: '' }
-            ],
-            correctAnswer: null
-          }
-        ]
-      };
-    },
-    methods: {
-      addQuestion() {
-        this.questions.push({
-          text: '',
-          answers: [
-            { text: '' },
-            { text: '' }
-          ],
-          correctAnswer: null
-        });
-      },
-      removeQuestion(index) {
-        this.questions.splice(index, 1);
-      },
-      addAnswer(questionIndex) {
-        this.questions[questionIndex].answers.push({ text: '' });
-      },
-      
-    },
-  };
+    export default {
+        name: 'CreateQuizPage',
+        data() {
+        return {
+            title: '',
+            questions: [
+            {
+                text: '',
+                answers: [
+                { text: '' },
+                { text: '' }
+                ],
+                correctAnswer: null
+            }
+            ]
+        };
+        },
+        methods: {
+            addQuestion() {
+                this.questions.push({
+                    text: '',
+                    answers: [
+                        { text: '' },
+                        { text: '' }
+                    ],
+                    correctAnswer: null
+                });
+            },
+            removeQuestion(index) {
+                this.questions.splice(index, 1);
+            },
+            addAnswer(questionIndex) {
+                this.questions[questionIndex].answers.push({ text: '' });
+            },
+            async submitQuiz() {
+                const quizData = {
+                    title: this.title,
+                    questions: this.questions.map(question => ({
+                        text: question.text,
+                        answers: question.answers.map(answer => answer.text),
+                        correctAnswer: question.correctAnswer
+                    }))
+                };
+
+                try {
+                    const response = await fetch('http://localhost:3000/add-quiz', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        credentials: 'include',
+                        body: JSON.stringify(quizData)
+                    });
+                    if (!response.ok) {
+                        throw new Error(`Error submitting quiz: ${response.statusText}`);
+                    }
+                    const data = await response.json();
+                    console.log('Quiz submitted successfully:', data);
+                    //redirect later
+                } catch (error) {
+                    console.error('Error submitting quiz:', error);
+                }
+            }
+        },
+    };
 </script>
