@@ -12,7 +12,7 @@
             required
             />
 
-            <div class="questions-section">
+            <div class="questions-section" style="border-top: white solid 1px; margin-top: 30px;">
                 <div v-for="(question, index) in questions" :key="index" class="question-item">
                     <div class="answers-section">
                         <input
@@ -20,7 +20,7 @@
                         type="text"
                         class="input-field"
                         :placeholder="'Question ' + (index + 1)"
-                        style="margin-top: 30px;"
+                        style="margin-top: 20px;"
                         required
                         />
                         <p style="margin-top: 30px;">Answers (Question {{ index + 1 }})</p>
