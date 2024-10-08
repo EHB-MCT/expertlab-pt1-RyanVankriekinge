@@ -112,3 +112,20 @@ p{
     margin-bottom: 15px;
     font-size: 20px;
 }
+
+.create-quiz-button{
+    color: white;
+    background-color: #4C3E7F;
+    border: white solid 1px;
+    border-bottom: none;
+    padding: 10px 120px;
+    width: 95%;
+    max-width: 340px;
+    border-radius: 20px 20px 0px 0px;
+    margin: 0px auto;
+    font-size: 20px;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}

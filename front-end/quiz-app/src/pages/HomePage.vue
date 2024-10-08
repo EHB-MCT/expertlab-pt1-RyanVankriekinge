@@ -4,6 +4,7 @@
         <h2>Play a quiz</h2>
         <button class="button-big" @click="goToCreateLobby">Host lobby</button>
         <button class="button-big" @click="goToJoinLobby">Join lobby</button>
+        <button class="create-quiz-button" @click="goToCreateQuiz">Create quiz</button>
     </div>
   </main>
 </template>
@@ -16,6 +17,9 @@
       },
       goToJoinLobby() {
         this.$router.push('/join-lobby');
+      },
+      goToCreateQuiz() {
+        this.$router.push('/create-quiz');
       }
     }
   };
