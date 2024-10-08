@@ -61,5 +61,8 @@ npm run lint
 10. **Authentication system**  
    Based on my own application [BugBytes (front-end)](https://github.com/EHB-MCT/web2-course-project-front-end-RyanVankriekinge) and [BugBytes (back-end)](https://github.com/EHB-MCT/web2-course-project-back-end-RyanVankriekinge)
 
+11. **Array iteration in JavaScript**  
+   Used the map() method as explained on [W3 Schools, JavaScript Array Iteration](https://www.w3schools.com/js/js_array_iteration.asp)
+
 
 ## Credentials
