@@ -13,18 +13,16 @@
             />
 
             <div class="questions-section">
-                <p style="margin-top: 30px;">Questions</p>
                 <div v-for="(question, index) in questions" :key="index" class="question-item">
-                    <input
-                    v-model="question.text"
-                    type="text"
-                    class="input-field"
-                    :placeholder="'Question ' + (index + 1)"
-                    style="margin-top: 30px;"
-                    required
-                    />
-
                     <div class="answers-section">
+                        <input
+                        v-model="question.text"
+                        type="text"
+                        class="input-field"
+                        :placeholder="'Question ' + (index + 1)"
+                        style="margin-top: 30px;"
+                        required
+                        />
                         <p style="margin-top: 30px;">Answers (Question {{ index + 1 }})</p>
                         <div v-for="(answer, answerIndex) in question.answers" :key="answerIndex" class="answer-item">
                             <input
@@ -46,7 +44,7 @@
                             </label>
                         </div>
                         <button type="button" class="button-small" @click="addAnswer(index)">Add Answer</button>
-                        <button type="button" class="button-small red" @click="removeQuestion(index)">Remove Question {{ index + 1 }}</button>
+                        <button type="button" class="button-small red" style="margin-bottom: 30px;" @click="removeQuestion(index)">Remove Question {{ index + 1 }}</button>
                     </div>
                 </div>
                 <button type="button" class="button-small" @click="addQuestion" style="margin-top: 30px;">Add Question</button>
