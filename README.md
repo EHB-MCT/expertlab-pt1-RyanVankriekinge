@@ -1,13 +1,33 @@
-## Instructions:
+# FlashQuiz
+## Instructions, back-end:
 **Project set-up**
 
 ```npm install``` (to install node modules)
 
 **To run server with API:**
+```
+node connectMongoDB.js
+```
+```
+node index.js
+```
 
-```node index.js```
-(to run server)
+## Instructions, front-end:
 
+**Project setup**
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
 
 ## References
 
