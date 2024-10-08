@@ -134,7 +134,7 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
         app.post('/add-quiz',isAuthenticated, async (req, res) => {
             console.log('Session Data:', req.session);
             try {
-                const username = req.session.username;
+                const username = req.session.user?.username;
                 if (!username) {
                     return res.status(401).send({ message: 'User is not authenticated' });
                 }
@@ -148,8 +148,8 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
                     })),
                 };
 
-                const result = await db.collection('quizzes').insertOne(newQuiz);
-                res.status(201).send(result.ops[0]);
+                const result = await db.collection('Quizzes').insertOne(newQuiz);
+                res.status(201).send({ insertedId: result.insertedId });
             } catch (error) {
                 console.error('Error inserting quiz into database:', error);
                 res.status(400).send(error);
