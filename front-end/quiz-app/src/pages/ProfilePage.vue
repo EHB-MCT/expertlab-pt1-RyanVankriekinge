@@ -4,6 +4,7 @@
             <h2>Profile</h2>
             <p>Username: {{ user.username }}</p>
             <p>E-mail: {{ user.email }}</p>
+            <button class="button-small red" style="margin-top: 30px;">Log out</button>
             <h2>My quizzes</h2>
 
         </div>
