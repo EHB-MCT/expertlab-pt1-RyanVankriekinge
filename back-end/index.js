@@ -176,15 +176,24 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
         io.on('connection', (socket) => {
             console.log('A user connected:', socket.id);
 
-            socket.on('create-lobby', (data) => {
-                console.log(data);
+            socket.on('create-lobby', async (data) => {
                 const { quizId, username } = data;
+
+                // Create lobby object
                 const lobby = {
                     quizId,
                     hostId: username,
                     isStarted: false,
                 };
-                io.emit('lobby-created', lobby);
+
+                try {
+                    const result = await db.collection('Lobbies').insertOne(lobby);
+                    console.log('Lobby created and inserted into MongoDB:', result.insertedId);
+
+                    io.emit('lobby-created', lobby);
+                } catch (error) {
+                    console.error('Error inserting lobby into DB:', error);
+                }
 
                 console.log(`Lobby created:`, lobby);
             });
