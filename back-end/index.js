@@ -190,29 +190,33 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
             socket.on('create-lobby', async (data) => {
                 const { quizId, userId } = data;
 
-                console.log('Received create-lobby event with data:', data);
-
-                const lobbyCode = generateCode(4);
-
-                const lobby = {
-                    quizId,
-                    code: lobbyCode,
-                    hostId: userId,
-                    isStarted: false,
-                };
-
                 if (!userId) {
                     console.error('UserId is null. Cannot create lobby.');
-                    return socket.emit('error', { message: 'UserId cannot be null' });
+                    return socket.emit('lobby-error', { message: 'UserId cannot be null' });
                 }
-
                 try {
+                    let lobbyCode;
+                    let exists = true;
+                    while (exists) {
+                        lobbyCode = generateCode(4);
+                        const existingLobby = await db.collection('Lobbies').findOne({ code: lobbyCode });
+                        exists = existingLobby !== null;
+                    }
+                    const lobby = {
+                        quizId,
+                        hostId: userId,
+                        code: lobbyCode,
+                        isStarted: false,
+                        players: [userId]
+                    };
+
                     const result = await db.collection('Lobbies').insertOne(lobby);
                     console.log('Lobby created and inserted into DB:', result.insertedId);
+
                     io.emit('lobby-created', lobby);
                 } catch (error) {
                     console.error('Error inserting lobby into DB:', error);
-                    socket.emit('error', { message: 'Failed to create lobby' });
+                    socket.emit('lobby-error', { message: 'Failed to create lobby' });
                 }
             });
 
