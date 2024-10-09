@@ -3,11 +3,16 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient;
+const http = require('http');
 const { ObjectId } = require('mongodb');
+const socketIo = require('socket.io');
+
 const app = express();
 const port = 3000;
 const mongoURL = 'mongodb+srv://ryanvankriekinge:fastquiz123@cluster0.2mict.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 const dbName = "FlashQuiz";
+const server = http.createServer(app);
+const io = socketIo(server);
 
 // CORS configuration
 const corsOptions = {
@@ -167,8 +172,30 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
             }
         });
 
+        //Socket.io
+        io.on('connection', (socket) => {
+            console.log('A user connected:', socket.id);
+
+            socket.on('create-lobby', (data) => {
+                console.log(data);
+                const { quizId, username } = data;
+                const lobby = {
+                    quizId,
+                    hostId: username,
+                    isStarted: false,
+                };
+                io.emit('lobby-created', lobby);
+
+                console.log(`Lobby created:`, lobby);
+            });
+
+            socket.on('disconnect', () => {
+                console.log('User disconnected:', socket.id);
+            });
+        });
+
         // Start the server
-        app.listen(port, () => {
+        server.listen(port, () => {
             console.log(`Server is running on http://localhost:${port}`);
         });
 
