@@ -118,7 +118,8 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
             console.log('Checking login session:', req.session);
             res.json({ success: true,
                 username: req.session.user.username,
-                email: req.session.user.email
+                email: req.session.user.email,
+                userId: req.session.user.userId,
             });
         });
 
