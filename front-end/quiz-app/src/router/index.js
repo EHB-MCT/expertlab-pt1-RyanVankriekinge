@@ -47,9 +47,10 @@ const router = createRouter({
       component: CreateQuizPage
     },
     {
-      path: '/host-lobby',
+      path: '/host-lobby/:lobbyCode/:players',
       name: 'host-lobby',
-      component: HostLobbyPage
+      component: HostLobbyPage,
+      props: true
     },
   ]
 });
