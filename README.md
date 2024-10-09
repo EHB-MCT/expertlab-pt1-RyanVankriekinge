@@ -73,4 +73,7 @@ npm run lint
 14. **Using Socket.IO in Vue**   
    [How to use socket.io with Vue3 Guide](https://socket.io/how-to/use-with-vue)
 
+15. **Socket.io: Joining rooms**   
+   Used to join and leave lobbies as explained in [Socket.io: Rooms](https://socket.io/docs/v3/rooms/)
+
 ## Credentials
