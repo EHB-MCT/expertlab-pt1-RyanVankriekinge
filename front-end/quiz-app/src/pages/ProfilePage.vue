@@ -14,6 +14,7 @@
 </template>
 
 <script>
+    import { changePageWhenNotLoggedIn } from '@/utils/changePageWhenNotLoggedIn.js';
     export default {
         name: 'ProfilePage',
         data() {
@@ -22,12 +23,8 @@
                 errorMessage: '',
             };
         },
-        async mounted() {
-            try {
-                const response = await fetch('http://localhost:3000/check-login', {
-                    method: 'GET',
-                    credentials: 'include' 
-                });
+        mounted() {
+            changePageWhenNotLoggedIn(this.$router);
             this.loadUserInfo();
         },
         methods: {
