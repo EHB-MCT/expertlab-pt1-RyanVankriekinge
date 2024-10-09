@@ -156,6 +156,17 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
             }
         });
 
+        app.get('/user-quizzes', isAuthenticated, async (req, res) => {
+            const username = req.session.user.username;
+            try {
+                const items = await db.collection('Quizzes').find({ userName: username }).toArray();
+                res.json({ success: true, quizzes: items });
+            } catch (error) {
+                console.error(error);
+                res.status(500).json({ success: false, error: 'Server Error' });
+            }
+        });
+
         // Start the server
         app.listen(port, () => {
             console.log(`Server is running on http://localhost:${port}`);
