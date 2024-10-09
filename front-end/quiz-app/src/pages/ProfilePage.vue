@@ -28,19 +28,30 @@
                     method: 'GET',
                     credentials: 'include' 
                 });
-
-                const data = await response.json();
-
-                if (data.success) {
-                    this.user = { username: data.username, email: data.email };
-                } else {
-                    this.errorMessage = 'User is not authenticated';
-                    console.error(this.errorMessage);
-                }
-            } catch (error) {
-                this.errorMessage = 'An error occurred while fetching user info';
-                console.error(this.errorMessage, error);
-            }
+            this.loadUserInfo();
         },
+        methods: {
+            async loadUserInfo() {
+                try {
+                    const response = await fetch('http://localhost:3000/check-login', {
+                        method: 'GET',
+                        credentials: 'include' 
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        this.user = { username: data.username, email: data.email };
+                    } else {
+                        this.errorMessage = 'User is not authenticated';
+                        console.error(this.errorMessage);
+                    }
+                } catch (error) {
+                    this.errorMessage = 'An error occurred while fetching user info';
+                    console.error(this.errorMessage, error);
+                }
+            }
+        }
+
     };
 </script>
