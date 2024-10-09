@@ -9,6 +9,7 @@
   </main>
 </template>
 <script>
+import { changePageWhenNotLoggedIn } from '@/utils/changePageWhenNotLoggedIn.js';
   export default {
     name: 'HomePage',
     methods: {
@@ -21,6 +22,9 @@
       goToCreateQuiz() {
         this.$router.push('/create-quiz');
       }
+    },
+    mounted(){
+      changePageWhenNotLoggedIn(this.$router);
     }
   };
 </script>
