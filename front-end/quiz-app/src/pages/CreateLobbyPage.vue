@@ -16,6 +16,7 @@
 </template>
 
 <script>
+    import { socket } from "@/utils/socket";
     export default {
         name: 'CreateLobbyPage',
         data() {
@@ -27,6 +28,13 @@
         },
         mounted() {
             this.fetchUserQuizzes(); 
+            socket.on("lobby-created", (data) => {
+                console.log("Lobby created:", data);
+            });
+
+            socket.on("lobby-error", (error) => {
+                this.errorMessage = error.message;
+            });
         },
         methods: {
             async fetchUserQuizzes() {
@@ -50,6 +58,17 @@
                 } catch (error) {
                     this.errorMessage = 'An error occurred while fetching quizzes';
                     console.error(this.errorMessage, error);
+                }
+            },
+            submitChooseQuizForm() {
+                if (this.selectedQuiz) {
+                    socket.emit('create-lobby', {
+                        quizId: this.selectedQuiz,
+                        username: this.username
+                    });
+                    console.log('Creating lobby for quiz:', this.selectedQuiz);
+                } else {
+                    this.errorMessage = 'Please select a quiz to continue.';
                 }
             }
         }
