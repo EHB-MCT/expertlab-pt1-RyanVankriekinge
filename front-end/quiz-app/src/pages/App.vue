@@ -18,12 +18,16 @@
 </template>
 
 <script>
+  import { changePageWhenNotLoggedIn } from '@/utils/changePageWhenNotLoggedIn.js';
   export default {
     name: 'App',
     methods: {
       goBack() {
         this.$router.go(-1);
-      }
+      } 
+    },
+    mounted(){
+      changePageWhenNotLoggedIn(this.$router);
     }
   };
 </script>
