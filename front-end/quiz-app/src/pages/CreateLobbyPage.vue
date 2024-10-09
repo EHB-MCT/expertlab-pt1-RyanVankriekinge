@@ -11,12 +11,14 @@
                 </select>
                 <button class="button-small" type="submit">Continue</button>
             </form>
+            <p v-if="errorMessage">{{ errorMessage }}</p>
         </div>
     </main>
 </template>
 
 <script>
     import { socket } from "@/utils/socket";
+
     export default {
         name: 'CreateLobbyPage',
         data() {
@@ -60,13 +62,30 @@
                     console.error(this.errorMessage, error);
                 }
             },
-            submitChooseQuizForm() {
+            async submitChooseQuizForm() {
                 if (this.selectedQuiz) {
-                    socket.emit('create-lobby', {
-                        quizId: this.selectedQuiz,
-                        username: this.username
-                    });
-                    console.log('Creating lobby for quiz:', this.selectedQuiz);
+                    try {
+                        const response = await fetch('http://localhost:3000/check-login', {
+                            method: 'GET',
+                            credentials: 'include'
+                        });
+                        const userData = await response.json();
+                        console.log(userData);
+
+                        if (userData.success) {
+                            const userId = userData.userId; 
+                            socket.emit('create-lobby', {
+                                quizId: this.selectedQuiz,
+                                userId: userId
+                            });
+                            console.log('Creating lobby for quiz:', this.selectedQuiz);
+                        } else {
+                            this.errorMessage = 'User is not authenticated. Please log in.';
+                        }
+                    } catch (error) {
+                        this.errorMessage = 'An error occurred while checking login status.';
+                        console.error(this.errorMessage, error);
+                    }
                 } else {
                     this.errorMessage = 'Please select a quiz to continue.';
                 }
