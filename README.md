@@ -64,5 +64,7 @@ npm run lint
 11. **Array iteration in JavaScript**  
    Used the map() method as explained on [W3 Schools, JavaScript Array Iteration](https://www.w3schools.com/js/js_array_iteration.asp)
 
+12. **MongoDB with Socket.IO**   
+   Integrated lobby functionalities using the [MongoDB Socket.io Guide](https://www.mongodb.com/developer/products/mongodb/mongo-socket-chat-example/)
 
 ## Credentials
