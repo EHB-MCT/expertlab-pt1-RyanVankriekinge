@@ -32,6 +32,13 @@
             this.fetchUserQuizzes(); 
             socket.on("lobby-created", (data) => {
                 console.log("Lobby created:", data);
+                this.$router.push({
+                    name: 'HostLobbyPage',
+                    params: {
+                        lobbyCode: data.lobbyCode,
+                        playersCount: data.players
+                    }
+                });
             });
 
             socket.on("lobby-error", (error) => {
