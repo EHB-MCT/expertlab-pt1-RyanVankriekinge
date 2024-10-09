@@ -76,4 +76,7 @@ npm run lint
 15. **Socket.io: Joining rooms**   
    Used to join and leave lobbies as explained in [Socket.io: Rooms](https://socket.io/docs/v3/rooms/)
 
+16. **Router push with parameters**   
+   Used to redirect to another vue Page with parameters [How to Use Vue Router's Push Function](https://masteringjs.io/tutorials/vue/router-push)
+
 ## Credentials
