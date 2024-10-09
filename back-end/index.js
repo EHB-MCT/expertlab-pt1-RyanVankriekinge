@@ -178,13 +178,25 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
         io.on('connection', (socket) => {
             console.log('A user connected:', socket.id);
 
+            function generateCode(length) {
+                const characterString = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                let code = '';
+                for (let i = 0; i < length; i++) {
+                    code += characterString.charAt(Math.floor(Math.random() * characterString.length));
+                }
+                return code;
+            }
+
             socket.on('create-lobby', async (data) => {
                 const { quizId, userId } = data;
 
                 console.log('Received create-lobby event with data:', data);
 
+                const lobbyCode = generateCode(4);
+
                 const lobby = {
                     quizId,
+                    code: lobbyCode,
                     hostId: userId,
                     isStarted: false,
                 };
