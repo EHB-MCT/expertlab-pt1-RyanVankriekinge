@@ -47,6 +47,25 @@
                     this.errorMessage = 'An error occurred while fetching user info';
                     console.error(this.errorMessage, error);
                 }
+            },
+            async logout() {
+                try {
+                    const response = await fetch('http://localhost:3000/log-out', {
+                        method: 'POST',
+                        credentials: 'include' 
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        this.user = null; 
+                        this.$router.push('/login');
+                    } else {
+                        console.error('Log out failed:', data.message);
+                    }
+                } catch (error) {
+                    console.error('An error occurred during log out:', error);
+                }
             }
         }
 
