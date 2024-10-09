@@ -65,6 +65,12 @@ npm run lint
    Used the map() method as explained on [W3 Schools, JavaScript Array Iteration](https://www.w3schools.com/js/js_array_iteration.asp)
 
 12. **MongoDB with Socket.IO**   
-   Integrated lobby functionalities using the [MongoDB Socket.io Guide](https://www.mongodb.com/developer/products/mongodb/mongo-socket-chat-example/)
+   Integrated socket.io using the [MongoDB Socket.io Guide](https://www.mongodb.com/developer/products/mongodb/mongo-socket-chat-example/)
+
+13. **Creating lobbies with Socket.IO**   
+   Implementing the lobby functionalities using the [Building Real-Time Functionalities with socket.io in Node.js Guide](https://arnab2001.hashnode.dev/building-real-time-chat-functionality-with-socketio-in-nodejs)
+
+14. **Using Socket.IO in Vue**   
+   [How to use socket.io with Vue3 Guide](https://socket.io/how-to/use-with-vue)
 
 ## Credentials
