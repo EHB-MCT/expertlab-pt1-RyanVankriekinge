@@ -62,7 +62,7 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
                     password
                 };
                 const result = await db.collection('Users').insertOne(newUser);
-                res.json({ success: true, userId: result.insertedId.toString() });
+                res.json({ success: true, userId: result.insertedId.toString(), _id: result.insertedId });
             } catch (error) {
                 console.error('Error adding user:', error);
                 res.status(500).json({ success: false, message: 'Server error' });
@@ -85,6 +85,7 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
                 const user = await db.collection('Users').findOne({ username: username, password });
                 if (user) {
                     req.session.user = {
+                        userId: user._id,
                         username: username,
                         email: user.email
                     };
@@ -94,7 +95,7 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
                             return res.status(500).json({ success: false, message: 'Session save error' });
                         }
                         console.log('Session after login:', req.session);
-                        res.json({ success: true, message: 'User successfully logged in' });
+                        res.json({ success: true, message: 'User successfully logged in', userId: user._id });
                     });
                 } else {
                     res.json({ success: false, message: 'Incorrect password or username' });
@@ -178,25 +179,29 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
             console.log('A user connected:', socket.id);
 
             socket.on('create-lobby', async (data) => {
-                const { quizId, username } = data;
+                const { quizId, userId } = data;
 
-                // Create lobby object
+                console.log('Received create-lobby event with data:', data);
+
                 const lobby = {
                     quizId,
-                    hostId: username,
+                    hostId: userId,
                     isStarted: false,
                 };
 
+                if (!userId) {
+                    console.error('UserId is null. Cannot create lobby.');
+                    return socket.emit('error', { message: 'UserId cannot be null' });
+                }
+
                 try {
                     const result = await db.collection('Lobbies').insertOne(lobby);
-                    console.log('Lobby created and inserted into MongoDB:', result.insertedId);
-
+                    console.log('Lobby created and inserted into DB:', result.insertedId);
                     io.emit('lobby-created', lobby);
                 } catch (error) {
                     console.error('Error inserting lobby into DB:', error);
+                    socket.emit('error', { message: 'Failed to create lobby' });
                 }
-
-                console.log(`Lobby created:`, lobby);
             });
 
             socket.on('disconnect', () => {
