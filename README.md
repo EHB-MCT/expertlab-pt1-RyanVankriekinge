@@ -15,6 +15,8 @@ node index.js
 ## Instructions, front-end:
 
 **Project setup**
+Make sure you're in the @/front-end/quiz-app directory
+
 ```
 npm install
 ```
@@ -22,11 +24,6 @@ npm install
 ### Compiles and hot-reloads for development
 ```
 npm run serve
-```
-
-### Lints and fixes files
-```
-npm run lint
 ```
 
 ## References
