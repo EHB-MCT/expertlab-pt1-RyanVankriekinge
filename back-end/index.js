@@ -213,7 +213,11 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
                     const result = await db.collection('Lobbies').insertOne(lobby);
                     console.log('Lobby created and inserted into DB:', result.insertedId);
 
-                    io.emit('lobby-created', lobby);
+                    socket.emit('lobby-created', {
+                        lobbyId: result.insertedId,
+                        lobbyCode: lobbyCode,
+                        players: lobby.players.length
+                    });
                 } catch (error) {
                     console.error('Error inserting lobby into DB:', error);
                     socket.emit('lobby-error', { message: 'Failed to create lobby' });
