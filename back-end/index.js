@@ -79,6 +79,27 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
             }
         });
 
+        app.get('/lobby/:code', async (req, res) => {
+            const lobbyCode = req.params.code;
+            try {
+                const lobby = await db.collection('Lobbies').findOne({ code: lobbyCode });
+                if (!lobby) {
+                    return res.status(404).json({ error: 'Lobby not found' });
+                }
+                const { _id, quizId, hostId, players } = lobby;
+                res.json({
+                    id: _id,
+                    quizId,
+                    hostId,
+                    players,
+                    lobbyCode
+                });
+            } catch (error) {
+                console.error('Error fetching lobby:', error);
+                res.status(500).json({ error: 'Server Error' });
+            }
+        });
+
         app.post('/login', async (req, res) => {
             const { username, password } = req.body;
             try {
