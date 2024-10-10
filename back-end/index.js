@@ -231,10 +231,11 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
                     return socket.emit('lobby-error', { message: 'UserId cannot be null' });
                 }
                 try {
-                    const lobby = await db.collection('Lobbies').findOne({ code: lobbyCode });
+                    const lobby = await db.collection('Lobbies').findOne({ lobbyCode: lobbyCode });
                     if (!lobby) {
                         return socket.emit('lobby-error', { message: 'Lobby not found' });
                     }
+                    if (!lobby.players.includes(userId)) {
                     socket.emit('lobby-joined', {
                         lobbyCode: lobbyCode,
                         players: [...lobby.players, userId]
