@@ -76,4 +76,7 @@ npm run serve
 16. **Router push with parameters**   
    Used to redirect to another vue Page with parameters [How to Use Vue Router's Push Function](https://masteringjs.io/tutorials/vue/router-push)
 
+16. **Capitalise text with CSS**   
+   Used to capitalise my input field for the lobby code, using [MDN Web Docs: text-transform](https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform)
+
 ## Credentials
