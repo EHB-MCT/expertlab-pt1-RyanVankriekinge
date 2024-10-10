@@ -231,13 +231,13 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
                     return socket.emit('lobby-error', { message: 'UserId cannot be null' });
                 }
                 try {
-                    const lobby = await db.collection('Lobbies').findOne({ lobbyCode: lobbyCode });
+                    const lobby = await db.collection('Lobbies').findOne({ code: lobbyCode });
                     if (!lobby) {
                         return socket.emit('lobby-error', { message: 'Lobby not found' });
                     }
                     if (!lobby.players.includes(userId)) {
                         await db.collection('Lobbies').updateOne(
-                            { lobbyCode: lobbyCode },
+                            { code: lobbyCode },
                             { $push: { players: userId } }
                         );
                     }
