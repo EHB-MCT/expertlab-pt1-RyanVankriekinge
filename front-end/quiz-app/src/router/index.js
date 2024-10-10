@@ -24,7 +24,8 @@ const router = createRouter({
     {
       path: '/join-lobby',
       name: 'join-lobby',
-      component: JoinLobbyPage
+      component: JoinLobbyPage,
+      props: true
     },
     {
       path: '/create-lobby',
