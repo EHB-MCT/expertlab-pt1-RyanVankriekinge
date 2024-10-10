@@ -243,7 +243,7 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
                     }
                     socket.emit('lobby-joined', {
                         lobbyCode: lobbyCode,
-                        players: [...lobby.players, userId]
+                        players: lobby.players
                     });
                 } catch (error) {
                     console.error('Error joining lobby:', error);
