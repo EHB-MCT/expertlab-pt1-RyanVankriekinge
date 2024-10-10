@@ -6,6 +6,8 @@
                 <input type="text" class="display-field" :value="lobbyCode" readonly>
                 <p style="margin-bottom: 30px; margin-top: 0px;">Share this room code with your friends!</p>
                 <button class="button-small" type="submit">Start Quiz</button>
+                <button class="button-small red" type="submit">Leave lobby</button>
+                <button class="button-small green" type="submit">Start Quiz</button>
                 <p>{{ players }}/10 players joined</p>
             </form>
         </div>

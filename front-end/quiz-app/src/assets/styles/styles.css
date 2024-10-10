@@ -100,7 +100,11 @@ p{
 }
 
 .red{
-    background-color: #e42d2d;
+    background-color: #c93333;
+}
+
+.green{
+    background-color: rgb(72, 119, 72);
 }
 
 .input-field{
