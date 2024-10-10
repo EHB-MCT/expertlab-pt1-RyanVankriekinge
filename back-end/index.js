@@ -224,6 +224,27 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
                 }
             });
 
+            socket.on('join-lobby', async (data) => {
+                const { lobbyCode, userId } = data;
+                if (!userId) {
+                    console.error('No UserId');
+                    return socket.emit('lobby-error', { message: 'UserId cannot be null' });
+                }
+                try {
+                    const lobby = await db.collection('Lobbies').findOne({ code: lobbyCode });
+                    if (!lobby) {
+                        return socket.emit('lobby-error', { message: 'Lobby not found' });
+                    }
+                    socket.emit('lobby-joined', {
+                        lobbyCode: lobbyCode,
+                        players: [...lobby.players, userId]
+                    });
+                } catch (error) {
+                    console.error('Error joining lobby:', error);
+                    socket.emit('lobby-error', { message: 'Failed to join lobby' });
+                }
+            });
+
             socket.on('disconnect', () => {
                 console.log('User disconnected:', socket.id);
             });
