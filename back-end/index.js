@@ -236,6 +236,11 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
                         return socket.emit('lobby-error', { message: 'Lobby not found' });
                     }
                     if (!lobby.players.includes(userId)) {
+                        await db.collection('Lobbies').updateOne(
+                            { lobbyCode: lobbyCode },
+                            { $push: { players: userId } }
+                        );
+                    }
                     socket.emit('lobby-joined', {
                         lobbyCode: lobbyCode,
                         players: [...lobby.players, userId]
