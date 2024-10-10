@@ -49,5 +49,21 @@
         }
       }
     },
+    mounted() {
+      socket.on('lobby-joined', (data) => {
+        console.log('Joined lobby:', data);
+        const playerCount = data.players.length;
+        this.$router.push({
+          name: 'lobby',  
+          params: {
+            lobbyCode: data.lobbyCode,
+            players: playerCount
+          }
+        });
+      });
+      socket.on('lobby-error', (error) => {
+        this.errorMessage = error.message;
+      });
+    },
   };
 </script>
