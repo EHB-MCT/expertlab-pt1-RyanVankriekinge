@@ -12,13 +12,42 @@
 </template>
 
 <script>
-    export default {
-        name: 'JoinLobbyPage',
-        data() {
-        return {
-            lobbyCode: '', 
-            errorMessage: '',
-        };
+  import { socket } from "@/utils/socket";
+  export default {
+    name: 'JoinLobbyPage',
+    data() {
+      return {
+          lobbyCode: '', 
+          errorMessage: '',
+      };
     },
-    };
+    methods: {
+      async submitJoinLobbyForm() {
+        if (this.lobbyCode) {
+          try {
+            const response = await fetch('http://localhost:3000/check-login', {
+              method: 'GET',
+              credentials: 'include'
+            });
+            const userData = await response.json();
+            
+            if (userData.success) {
+              const userId = userData.userId; 
+              socket.emit('join-lobby', {
+                lobbyCode: this.lobbyCode,
+                userId: userId
+              });
+            } else {
+              this.errorMessage = 'User is not authenticated';
+            }
+          } catch (error) {
+            this.errorMessage = 'An error occurred while authenticating user';
+            console.error(this.errorMessage, error);
+          }
+        } else {
+            this.errorMessage = 'Lobby not found.';
+        }
+      }
+    },
+  };
 </script>
