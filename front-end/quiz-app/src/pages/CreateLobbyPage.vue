@@ -33,7 +33,7 @@
             socket.on("lobby-created", (data) => {
                 console.log("Lobby created:", data);
                 this.$router.push({
-                    name: 'host-lobby',
+                    name: 'lobby',
                     params: {
                         lobbyCode: data.lobbyCode,
                         players: data.players

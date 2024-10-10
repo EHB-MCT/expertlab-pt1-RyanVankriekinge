@@ -14,7 +14,7 @@
 
 <script>
     export default {
-        name: 'HostLobbyPage',
+        name: 'LobbyPage',
         props: {
             lobbyCode: {
                 type: String,
