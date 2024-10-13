@@ -5,25 +5,23 @@
             <form class="join-lobby-form" @submit.prevent="startQuiz">
                 <input type="text" class="display-field" :value="lobbyCode" readonly>
                 <p style="margin-bottom: 30px; margin-top: 0px;">Share this room code with your friends!</p>
-                <button class="button-small red" type="button">Leave lobby</button>
-                <button v-if="isHost" class="button-small green" type="button">Start Quiz</button>
-                <p>{{ players }}/10 players joined</p>
+                <button class="button-small red" type="button" @click="leaveLobby">Leave lobby</button>
+                <button v-if="isHost" class="button-small green" type="button" @click="startQuiz">Start Quiz</button>
+                <p>{{ playerCount }}/10 players joined</p>
             </form>
         </div>
     </main>
 </template>
 
 <script>
+    import { socket } from "@/utils/socket";
+
     export default {
         name: 'LobbyPage',
         props: {
             lobbyCode: {
                 type: String,
-                required: true
-            },
-            players: {
-                type: String,
-                required: true
+                required: true,
             }
         },
         data() {
@@ -31,10 +29,14 @@
                 userId: '',
                 hostId: '',
                 isHost: false,
+                playerCount: 0,
             };
         },
         async mounted() {
             await this.checkIfUserIsHost();
+            socket.on('player-joined', (data) => {
+                this.playerCount = data.playerCount;
+            });
         },
         methods: {
             async checkIfUserIsHost() {
@@ -47,7 +49,9 @@
                         throw new Error('Failed to fetch lobby data');
                     }
                     const lobbyData = await response.json();
-                    this.hostId = lobbyData.hostId; 
+                    this.hostId = lobbyData.hostId;
+                    this.playerCount = lobbyData.players.length;
+
                     const userResponse = await fetch('http://localhost:3000/check-login', {
                         method: 'GET',
                         credentials: 'include'
@@ -55,14 +59,11 @@
                     const userData = await userResponse.json();
                     if (userData.success) {
                         this.userId = userData.userId;
-                        console.log('Current user ID:', this.userId);
-                    } else {
-                        console.error('User is not authenticated');
                     }
-                    this.isHost = this.hostId === this.userId; 
-                    console.log('Is host:', this.isHost, 'Host ID:', this.hostId, 'User ID:', this.userId);
+
+                    this.isHost = this.hostId === this.userId;
                 } catch (error) {
-                    console.error('Error fetching lobby data:', error);
+                    console.error('Error fetching lobby or user data:', error);
                 }
             },
             startQuiz(){

@@ -48,7 +48,7 @@ const router = createRouter({
       component: CreateQuizPage
     },
     {
-      path: '/lobby/:lobbyCode/:players',
+      path: '/lobby/:lobbyCode',
       name: 'lobby',
       component: LobbyPage,
       props: true

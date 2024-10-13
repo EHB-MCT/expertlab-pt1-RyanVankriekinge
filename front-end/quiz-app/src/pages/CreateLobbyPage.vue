@@ -35,8 +35,7 @@
                 this.$router.push({
                     name: 'lobby',
                     params: {
-                        lobbyCode: data.lobbyCode,
-                        players: data.players
+                        lobbyCode: data.lobbyCode
                     }
                 });
             });
