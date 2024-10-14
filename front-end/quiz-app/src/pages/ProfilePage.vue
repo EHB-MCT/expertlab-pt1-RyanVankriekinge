@@ -7,7 +7,7 @@
             <button class="button-small red" style="margin-top: 30px;" @click="logout">Log out</button>
             <h2>My quizzes</h2>
         </div>
-        <div v-else>
+        <div v-else class="content">
             <p>Loading user information...</p>
         </div>
     </main>

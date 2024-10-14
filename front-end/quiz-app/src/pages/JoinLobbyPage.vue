@@ -51,19 +51,29 @@
     },
     mounted() {
       socket.on('lobby-joined', (data) => {
-        console.log('Joined lobby:', data);
-        const playerCount = data.players.length;
-        this.$router.push({
-          name: 'lobby',  
-          params: {
-            lobbyCode: data.lobbyCode,
-            players: playerCount
-          }
-        });
+        console.log('Joined lobby:', data); 
+        const { lobbyCode } = data; 
+
+        if (lobbyCode) {
+          console.log('Navigating to lobby with code:', lobbyCode);
+          this.$router.push({
+            name: 'lobby',
+            params: {
+              lobbyCode: lobbyCode
+            }
+          }).catch(err => {
+            console.error('Router push error:', err);
+          });
+        } else {
+          console.error('lobbyCode is missing in the received data:', data);
+          this.errorMessage = 'Failed to join the lobby. Missing lobby code.';
+        }
       });
+
       socket.on('lobby-error', (error) => {
         this.errorMessage = error.message;
       });
     },
+
   };
 </script>

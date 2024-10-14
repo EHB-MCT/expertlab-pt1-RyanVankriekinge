@@ -269,6 +269,7 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
                     const updatedPlayerCount = updatedLobby.players.length;
                     socket.join(lobbyCode);
                     io.to(lobbyCode).emit('player-joined', { playerCount: updatedPlayerCount });
+                    console.log('Emitting lobby-joined for lobby:', lobbyCode);
                     socket.emit('lobby-joined', {
                         lobbyCode: lobbyCode,
                         players: updatedLobby.players
@@ -281,19 +282,31 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
             });
 
             socket.on('start-quiz', async (data) => {
-                console.log('start-quiz emit accessed in back-end');
+                console.log('start-quiz accessed in back-end');
                 const { lobbyCode, userId } = data;
+
                 try {
                     const lobby = await db.collection('Lobbies').findOne({ code: lobbyCode });
-                    console.log('Lobby:', lobby);
-                    console.log('UserId:', userId);
-                    if (lobby && userId === lobby.hostId) {
-                        io.to(lobbyCode).emit('quiz-started', { message: 'The quiz has started!' });
+                    console.log('Lobby fetched:', lobby);
+
+                    if (lobby) {
+                        console.log('UserId:', userId, 'HostId:', lobby.hostId);
+                        const quiz = await db.collection('Quizzes').findOne({ _id: new ObjectId(lobby.quizId) });
+                        console.log('Questions available:', quiz.questions);
+                        io.to(lobbyCode).emit('quiz-starting', {
+                            title: quiz.title,
+                            questions: quiz.questions
+                        });
+                        console.log('quiz-starting emitted');
+                        setTimeout(() => {
+                            const firstQuestion = quiz.questions[0];
+                            io.to(lobbyCode).emit('next-question', firstQuestion);
+                        }, 3000);
                     } else {
-                        console.error('Unable to start quiz: Host validation failed or lobby not found.');
+                        console.log('Lobby not found.');
                     }
                 } catch (error) {
-                    console.error('Error in start-quiz:', error);
+                    console.error('Error in start-quiz handler:', error);
                 }
             });
 

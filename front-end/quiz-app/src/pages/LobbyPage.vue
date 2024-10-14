@@ -37,8 +37,8 @@
             socket.on('player-joined', (data) => {
                 this.playerCount = data.playerCount;
             });
-            socket.on('quiz-started', (data) => {
-                console.log('quiz-started emit received')
+            socket.on('quiz-starting', (data) => {
+                console.log('quiz-starting emit received')
                 console.log(data.message);
                 this.$router.push({ name: 'quiz', params: { lobbyCode: this.lobbyCode } });
             });
