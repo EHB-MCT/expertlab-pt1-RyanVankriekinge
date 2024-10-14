@@ -37,6 +37,11 @@
             socket.on('player-joined', (data) => {
                 this.playerCount = data.playerCount;
             });
+            socket.on('quiz-started', (data) => {
+                console.log('quiz-started emit received')
+                console.log(data.message);
+                this.$router.push({ name: 'quiz', params: { lobbyCode: this.lobbyCode } });
+            });
         },
         methods: {
             async checkIfUserIsHost() {
@@ -66,8 +71,14 @@
                     console.error('Error fetching lobby or user data:', error);
                 }
             },
-            startQuiz(){
-                //
+            startQuiz() {
+                if (this.isHost) {
+                    socket.emit('start-quiz', {
+                        lobbyCode: this.lobbyCode,
+                        userId: this.userId
+                    });
+                    console.log('Quiz starting...');
+                }
             },
             leaveLobby(){
                 //

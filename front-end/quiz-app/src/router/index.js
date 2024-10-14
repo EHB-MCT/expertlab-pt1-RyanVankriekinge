@@ -7,6 +7,7 @@ import LoginPage from '../pages/LoginPage.vue';
 import CreateAccountPage from '@/pages/CreateAccountPage.vue';
 import CreateQuizPage from '@/pages/CreateQuizPage.vue';
 import LobbyPage from '@/pages/LobbyPage.vue';
+import QuizPage from '@/pages/QuizPage.vue';
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
@@ -51,6 +52,12 @@ const router = createRouter({
       path: '/lobby/:lobbyCode',
       name: 'lobby',
       component: LobbyPage,
+      props: true
+    },
+    {
+      path: '/quiz/:lobbyCode',
+      name: 'quiz',
+      component: QuizPage,
       props: true
     },
   ]
