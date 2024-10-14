@@ -311,6 +311,22 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
             });
 
 
+
+            socket.on('next-question', async (data) => {
+                const { lobbyCode, questionId } = data;
+
+                try {
+                    const lobby = await db.collection('Lobbies').findOne({ code: lobbyCode });
+                    console.log('Lobby fetched:', lobby);
+                    const quiz = await db.collection('Quizzes').findOne({ _id: new ObjectId(lobby.quizId) });
+                    console.log('Quiz fetched:', quiz);
+                    io.to(lobbyCode).emit('next-question', question);
+                } catch (error) {
+                    console.error('Error in next-question handler:', error);
+                    socket.emit('quiz-error', { message: 'Error retrieving next question.' });
+                }
+            });
+
             socket.on('disconnect', () => {
                 console.log('User disconnected:', socket.id);
             });
