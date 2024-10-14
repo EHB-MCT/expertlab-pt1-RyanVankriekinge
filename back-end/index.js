@@ -268,7 +268,7 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
                     const updatedLobby = await db.collection('Lobbies').findOne({ code: lobbyCode });
                     const updatedPlayerCount = updatedLobby.players.length;
                     socket.join(lobbyCode);
-                    io.in(lobbyCode).emit('player-joined', { playerCount: updatedPlayerCount });
+                    io.to(lobbyCode).emit('player-joined', { playerCount: updatedPlayerCount });
                     socket.emit('lobby-joined', {
                         lobbyCode: lobbyCode,
                         players: updatedLobby.players
@@ -279,6 +279,24 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
                     socket.emit('lobby-error', { message: 'Failed to join lobby' });
                 }
             });
+
+            socket.on('start-quiz', async (data) => {
+                console.log('start-quiz emit accessed in back-end');
+                const { lobbyCode, userId } = data;
+                try {
+                    const lobby = await db.collection('Lobbies').findOne({ code: lobbyCode });
+                    console.log('Lobby:', lobby);
+                    console.log('UserId:', userId);
+                    if (lobby && userId === lobby.hostId) {
+                        io.to(lobbyCode).emit('quiz-started', { message: 'The quiz has started!' });
+                    } else {
+                        console.error('Unable to start quiz: Host validation failed or lobby not found.');
+                    }
+                } catch (error) {
+                    console.error('Error in start-quiz:', error);
+                }
+            });
+
 
             socket.on('disconnect', () => {
                 console.log('User disconnected:', socket.id);
