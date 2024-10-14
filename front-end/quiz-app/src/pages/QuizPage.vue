@@ -43,5 +43,18 @@ export default {
                 this.loadNextQuestion();
             }, 3000);
         },
+        loadNextQuestion() {
+            if (this.questions && this.questions.length > 0) {
+                if (this.currentQuestionIndex < this.questions.length) {
+                    this.quizStarted = true;
+                    this.currentQuestion = this.questions[this.currentQuestionIndex];
+                    this.currentQuestionIndex++;
+                } else {
+                    this.endQuiz();
+                }
+            } else {
+                console.error('No questions available to load.');
+            }
+        },
     }
 </script>
