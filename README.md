@@ -80,14 +80,14 @@ npm run serve
    Used to capitalise my input field for the lobby code, using [MDN Web Docs: text-transform](https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform)
 
 ## Credentials
-> User 1
->> name: Ryan <br>
->> password: Secret
+### User 1
+> username: Ryan <br>
+> password: Secret
 
-> User 2
->> name: Bert <br>
->> password: Secret
+### User 2
+> username: Test User <br>
+> password: password123
 
-> User 3
->> name: Example <br>
->> password: Secret
+### User 3
+> username: test <br>
+> password: test
