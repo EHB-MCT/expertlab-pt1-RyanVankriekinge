@@ -56,5 +56,6 @@ export default {
                 console.error('No questions available to load.');
             }
         },
-    }
+    },
+};
 </script>
